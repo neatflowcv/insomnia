@@ -6,35 +6,64 @@ meta:
   modified: 1762747905367
   description: ""
 collection:
-  - url: clusters
-    name: Create Cluster
+  - name: cluster
     meta:
-      id: req_a5dfaee940b84cbdb99dd21288c65e29
-      created: 1762747924605
-      modified: 1762766743260
-      isPrivate: false
+      id: fld_89648169513e4892b8594a2493381379
+      created: 1762777442425
+      modified: 1762777442425
+      sortKey: -1762777442425
       description: ""
-      sortKey: -1762747924605
-    method: POST
-    body:
-      mimeType: application/json
-      text: |-
-        {
-        	""
-        }
-    headers:
-      - name: Content-Type
-        value: application/json
-      - name: User-Agent
-        value: insomnia/12.0.0
-    settings:
-      renderRequestBody: true
-      encodeUrl: true
-      followRedirects: global
-      cookies:
-        send: true
-        store: true
-      rebuildPath: true
+    children:
+      - url: "{{ _.base_url }}/clusters"
+        name: /clusters
+        meta:
+          id: req_2670c734b691465797f30903eb995640
+          created: 1762777442426
+          modified: 1762777442426
+          isPrivate: false
+          description: list clusters
+          sortKey: -1762777442426
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/clusters"
+        name: /clusters
+        meta:
+          id: req_33c1dcc61c594c15ab7a50a42c672014
+          created: 1762777442426
+          modified: 1762787784986
+          isPrivate: false
+          description: register cluster
+          sortKey: -1762777442426
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "name": "string",
+              "hosts": [
+                "192.168.56.106:3300"
+              ],
+              "key": "AQAEABJpiBJDORAAXH2IKOkGFX9E8MJesTyYjg=="
+            }
+        headers:
+          - name: Content-Type
+            disabled: false
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
@@ -46,8 +75,25 @@ environments:
   meta:
     id: env_fff2982d84334da166659d7c22a88f9cd75fc9f3
     created: 1762747905370
-    modified: 1762766665951
+    modified: 1762777629204
     isPrivate: false
+  data:
+    scheme: http
+    host: 127.0.0.1:8080
+    base_path: ""
+    base_url: "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}"
+  subEnvironments:
+    - name: OpenAPI env api.rest.rodeo
+      meta:
+        id: env_4aeb803336d146439ddd1a23f70125bf
+        created: 1762777442425
+        modified: 1762777442425
+        isPrivate: false
+        sortKey: 1762777442425
+      data:
+        scheme: https
+        base_path: ""
+        host: api.rest.rodeo
 spec:
   contents:
     openapi: 3.0.4
@@ -84,6 +130,12 @@ spec:
                     $ref: "#/components/schemas/Cluster"
             "400":
               description: bad requests
+            "500":
+              description: internal server error
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/Error"
         get:
           description: list clusters
           operationId: list.clusters
@@ -100,27 +152,21 @@ spec:
                       $ref: "#/components/schemas/Cluster"
             "204":
               description: no contents
-      /clusters/{id}:
-        get:
-          description: get cluster
-          operationId: get.cluster
-          tags:
-            - cluster
-          parameters:
-            - name: id
-              in: path
-              required: true
-              schema:
-                type: string
-          responses:
-            "200":
-              description: success
+            "500":
+              description: internal server error
               content:
                 application/json:
                   schema:
-                    type: object
+                    $ref: "#/components/schemas/Error"
     components:
       schemas:
+        Error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
         RegisterCluster:
           type: object
           properties:
@@ -161,4 +207,4 @@ spec:
   meta:
     id: spc_29e65de7630742dc863a1888f7bb389b
     created: 1762747969141
-    modified: 1762768309214
+    modified: 1762778335917
