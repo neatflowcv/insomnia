@@ -1,0 +1,718 @@
+type: spec.insomnia.rest/5.0
+name: vesta
+meta:
+  id: wrk_aef42a1d66a1442e8a9b3a7f7e4d3c8a
+  created: 1762765044171
+  modified: 1762765075658
+  description: ""
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_a685f5ebe083c403cc1999af13ed62ad678f36af
+    created: 1762765044176
+    modified: 1762765044176
+environments:
+  name: Base Environment
+  meta:
+    id: env_a685f5ebe083c403cc1999af13ed62ad678f36af
+    created: 1762765044174
+    modified: 1762765044174
+    isPrivate: false
+spec:
+  contents:
+    openapi: 3.0.4
+    info:
+      title: vesta
+      description: ""
+      version: 1.0.0
+    tags:
+      - name: instance
+      - name: base
+    paths:
+      /v1/internal/agents:
+        post:
+          summary: register agent
+          deprecated: false
+          description: ""
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Agent"
+            required: true
+          responses:
+            "204":
+              description: ""
+            "409":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: object
+            "500":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    title: ""
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+      /v1/internal/instances:
+        post:
+          summary: create instance
+          deprecated: false
+          description: ""
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/CreateInstance"
+            required: true
+          responses:
+            "204":
+              description: ""
+            "500":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    title: ""
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+        put:
+          summary: update instance
+          deprecated: false
+          description: ""
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/CreateInstance"
+            required: true
+          responses:
+            "204":
+              description: ""
+            "500":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    title: ""
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+      /v1/internal/instances/{id}:
+        delete:
+          summary: delete instance
+          deprecated: false
+          description: ""
+          parameters:
+            - name: id
+              in: path
+              description: ""
+              required: true
+              schema:
+                type: string
+          responses:
+            "204":
+              description: ""
+            "500":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    title: ""
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+      /v1/internal/bases/{id}:
+        put:
+          summary: update base
+          deprecated: false
+          description: ""
+          parameters:
+            - name: id
+              in: path
+              description: ""
+              required: true
+              schema:
+                type: string
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/CreateInstance"
+            required: true
+          responses:
+            "204":
+              description: ""
+            "500":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    title: ""
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+        delete:
+          summary: delete base
+          deprecated: false
+          description: ""
+          parameters:
+            - name: id
+              in: path
+              description: ""
+              required: true
+              schema:
+                type: string
+          responses:
+            "204":
+              description: ""
+            "500":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    title: ""
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+      /v1/instances:
+        get:
+          summary: list instances
+          deprecated: false
+          description: ""
+          operationId: list.instances
+          tags:
+            - instance
+          parameters:
+            - name: agent_id
+              in: query
+              description: ""
+              required: false
+              schema:
+                type: string
+          responses:
+            "200":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Instance"
+            "204":
+              description: ""
+            "500":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    title: ""
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+      /v1/instances/{id}:
+        delete:
+          summary: delete instance
+          deprecated: false
+          description: ""
+          tags:
+            - instance
+          parameters:
+            - name: id
+              in: path
+              description: ""
+              required: true
+              schema:
+                type: string
+          responses:
+            "204":
+              description: ""
+            "404":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      instance_id:
+                        type: string
+                    required:
+                      - instance_id
+            "500":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    title: ""
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+      /v1/instances/{id}/promote:
+        post:
+          summary: promote instance
+          deprecated: false
+          description: instance를 base로 승격한다.
+          tags:
+            - base
+            - instance
+          parameters:
+            - name: id
+              in: path
+              description: ""
+              required: true
+              schema:
+                type: string
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/CreateBase"
+            required: true
+          responses:
+            "200":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/Base"
+            "404":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      instance_id:
+                        type: string
+                    required:
+                      - instance_id
+            "500":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    title: ""
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+      /v1/instances/{id}/control:
+        patch:
+          summary: control instance
+          deprecated: false
+          description: ""
+          tags:
+            - instance
+          parameters:
+            - name: id
+              in: path
+              description: ""
+              required: true
+              example: d3854f3b-225f-431e-9a9b-83ef36718ca3
+              schema:
+                type: string
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      enum:
+                        - start
+                        - stop
+            required: true
+          responses:
+            "200":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/Instance"
+            "404":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      instance_id:
+                        type: string
+                    required:
+                      - instance_id
+            "409":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    title: ""
+                    type: object
+                    properties:
+                      instance_id:
+                        type: string
+                    required:
+                      - instance_id
+            "500":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    title: ""
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+      /v1/bases:
+        get:
+          summary: list bases
+          deprecated: false
+          description: ""
+          operationId: list.bases
+          tags:
+            - base
+          responses:
+            "200":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Base"
+            "204":
+              description: ""
+            "500":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    title: ""
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+      /v1/bases/{id}:
+        delete:
+          summary: delete base
+          deprecated: false
+          description: ""
+          tags:
+            - base
+          parameters:
+            - name: id
+              in: path
+              description: ""
+              required: true
+              schema:
+                type: string
+          responses:
+            "204":
+              description: ""
+            "404":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      base_id:
+                        type: string
+                    required:
+                      - base_id
+            "500":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    title: ""
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+      /v1/bases/{id}/clone:
+        post:
+          summary: clone base
+          deprecated: false
+          description: base를 기반으로 instance를 생성한다.
+          tags:
+            - base
+            - instance
+          parameters:
+            - name: id
+              in: path
+              description: ""
+              required: true
+              schema:
+                type: string
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    storage:
+                      type: integer
+                      format: uint64
+                      description: byte 단위, 설정하지 않으면 기존 base storage 크기 유지
+                    ram:
+                      type: integer
+                      format: uint64
+                      description: byte 단위, 설정하지 않으면 기존 base ram 크기 유지
+                  required:
+                    - name
+            required: true
+          responses:
+            "200":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      storage:
+                        type: integer
+                        format: uint64
+                      ram:
+                        type: integer
+                        format: uint64
+                    required:
+                      - name
+                      - storage
+                      - ram
+                      - id
+            "404":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      base_id:
+                        type: string
+                    required:
+                      - base_id
+            "500":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    title: ""
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+            "503":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    title: ""
+                    type: object
+                    properties:
+                      base_id:
+                        type: string
+                    required:
+                      - base_id
+    components:
+      schemas:
+        InstanceStatus:
+          type: string
+          enum:
+            - Booting
+            - Running
+            - Stopped
+            - Stopping
+            - Unknown
+        CreateInstance:
+          type: object
+          properties:
+            agent_id:
+              type: string
+            id:
+              type: string
+            name:
+              type: string
+            cpu:
+              type: integer
+              format: uint64
+            ram:
+              type: integer
+              format: uint64
+            storage:
+              type: integer
+              format: uint64
+            networks:
+              type: array
+              items:
+                $ref: "#/components/schemas/Network"
+            status:
+              $ref: "#/components/schemas/InstanceStatus"
+          required:
+            - agent_id
+            - id
+            - name
+            - cpu
+            - ram
+            - storage
+            - networks
+            - status
+        Instance:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            cpu:
+              type: integer
+              format: uint64
+            ram:
+              type: integer
+              format: uint64
+            storage:
+              type: integer
+              format: uint64
+            networks:
+              type: array
+              items:
+                $ref: "#/components/schemas/Network"
+            status:
+              $ref: "#/components/schemas/InstanceStatus"
+          required:
+            - status
+            - id
+            - name
+            - cpu
+            - ram
+            - storage
+            - networks
+        CreateBase:
+          type: object
+          properties:
+            name:
+              type: string
+            cpu:
+              type: integer
+              format: uint64
+              description: core 개수, 지정하지 않으면 base 개수 유지
+            ram:
+              type: integer
+              format: uint64
+              description: ram  크기(byte), 지정하지 않으면 base 크기 유지
+            storage:
+              type: integer
+              format: uint64
+              description: storage 크기(byte), 지정하지 않으면 base 크기 유지
+          required:
+            - name
+        Base:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            cpu:
+              type: integer
+              format: uint64
+            ram:
+              type: integer
+              format: uint64
+            storage:
+              type: integer
+              format: uint64
+            networks:
+              type: array
+              items:
+                $ref: "#/components/schemas/Network"
+          required:
+            - id
+            - name
+            - cpu
+            - ram
+            - storage
+            - networks
+        Agent:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              $ref: "#/components/schemas/AgentType"
+            payload:
+              type: string
+          required:
+            - id
+            - payload
+            - type
+        AgentType:
+          type: string
+          enum:
+            - kubernetes
+        NetworkType:
+          type: string
+          enum:
+            - NAT
+            - HostOnly
+            - Internal
+        Network:
+          type: object
+          properties:
+            name:
+              type: string
+            type:
+              type: string
+            address:
+              type: string
+          required:
+            - type
+  meta:
+    id: spc_a18da6a7e78d4779bdf1394bc28fb8b1
+    created: 1762765044172
+    modified: 1762765075657

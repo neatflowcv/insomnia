@@ -1,0 +1,156 @@
+type: spec.insomnia.rest/5.0
+name: loa
+meta:
+  id: wrk_4e323b3e1a9941aeada5454494ec3db2
+  created: 1762763831112
+  modified: 1762763849407
+  description: ""
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_a6cc2b9669fbb43429ac0d431b6d5197685c2b72
+    created: 1762763831120
+    modified: 1762763831120
+environments:
+  name: Base Environment
+  meta:
+    id: env_a6cc2b9669fbb43429ac0d431b6d5197685c2b72
+    created: 1762763831118
+    modified: 1762763831118
+    isPrivate: false
+spec:
+  contents:
+    openapi: 3.0.4
+    info:
+      title: loa
+      version: 0.0.0
+      description: loa
+      contact:
+        name: biosvos
+        email: biosvos@gmail.com
+    servers:
+      - url: https://api.rest.rodeo
+        description: Live
+    tags:
+      - name: character
+      - name: external
+    paths:
+      /characters:
+        get:
+          description: list characters
+          operationId: list.characters
+          tags:
+            - character
+            - external
+          parameters:
+            - name: offset
+              in: query
+              description: ""
+              required: false
+              schema:
+                type: integer
+                default: 0
+            - name: limit
+              in: query
+              description: ""
+              required: false
+              schema:
+                type: integer
+                default: 50
+          responses:
+            "200":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/CharacterSummary"
+            "204":
+              description: ""
+      /characters/{name}:
+        get:
+          summary: get character
+          deprecated: false
+          description: ""
+          operationId: get.character
+          tags:
+            - character
+            - external
+          parameters:
+            - name: name
+              in: path
+              description: ""
+              required: true
+              schema:
+                type: string
+          responses:
+            "200":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                    required:
+                      - name
+            "404":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: object
+      /characters/{name}/refresh:
+        post:
+          summary: refresh character
+          deprecated: false
+          description: ""
+          operationId: refresh.character
+          tags:
+            - character
+            - external
+          parameters:
+            - name: name
+              in: path
+              description: ""
+              required: true
+              schema:
+                type: string
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    force:
+                      type: boolean
+            required: true
+          responses:
+            "200":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: object
+    components:
+      schemas:
+        CharacterSummary:
+          type: object
+          properties:
+            name:
+              type: string
+          required:
+            - name
+        Character:
+          type: object
+          properties:
+            name:
+              type: string
+          required:
+            - name
+  meta:
+    id: spc_bbe049f61083448fbb3a60f21adb1c13
+    created: 1762763831116
+    modified: 1762764134863

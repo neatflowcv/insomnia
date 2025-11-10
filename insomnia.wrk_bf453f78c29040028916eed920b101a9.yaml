@@ -1,0 +1,164 @@
+type: spec.insomnia.rest/5.0
+name: LoaKeyPool 1.0.0
+meta:
+  id: wrk_bf453f78c29040028916eed920b101a9
+  created: 1762764257189
+  modified: 1762764257189
+  description: ""
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_45418f2879ed6eeb25ecab713cafad5550d190c0
+    created: 1762764257197
+    modified: 1762764257197
+environments:
+  name: Base Environment
+  meta:
+    id: env_45418f2879ed6eeb25ecab713cafad5550d190c0
+    created: 1762764257195
+    modified: 1762764257195
+    isPrivate: false
+spec:
+  contents:
+    openapi: 3.0.1
+    info:
+      title: loa-key-pool
+      description: ""
+      version: 1.0.0
+    tags:
+      - name: key
+      - name: external
+      - name: internal
+    paths:
+      /keys:
+        post:
+          summary: create key
+          deprecated: false
+          description: ""
+          operationId: create.key
+          tags:
+            - key
+            - external
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    key:
+                      type: string
+                    description:
+                      type: string
+                  required:
+                    - key
+            required: true
+          responses:
+            "200":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      key:
+                        type: string
+                      description:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - key
+                      - id
+        get:
+          summary: list keys
+          deprecated: false
+          description: ""
+          operationId: list.keys
+          tags:
+            - key
+            - external
+          responses:
+            "200":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Key"
+            "204":
+              description: ""
+      /keys/{id}:
+        delete:
+          summary: delete key
+          deprecated: false
+          description: ""
+          operationId: delete.key
+          tags:
+            - key
+            - external
+          parameters:
+            - name: id
+              in: path
+              description: ""
+              required: true
+              schema:
+                type: string
+          responses:
+            "204":
+              description: ""
+            "404":
+              description: ""
+      /pick:
+        get:
+          summary: pick key
+          deprecated: false
+          description: ""
+          operationId: pick.key
+          tags:
+            - key
+            - internal
+          responses:
+            "200":
+              description: ""
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      key:
+                        type: string
+                      description:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - key
+                      - id
+    components:
+      schemas:
+        Key:
+          type: object
+          properties:
+            key:
+              type: string
+            description:
+              type: string
+            id:
+              type: string
+          required:
+            - key
+            - id
+        CreateKeyRequest:
+          type: object
+          properties:
+            key:
+              type: string
+            description:
+              type: string
+          required:
+            - key
+  meta:
+    id: spc_df6ecaf81d0f4634a5ab25366f245e8a
+    created: 1762764257192
+    modified: 1762764270206

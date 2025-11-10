@@ -1,0 +1,144 @@
+type: spec.insomnia.rest/5.0
+name: cepher
+meta:
+  id: wrk_6731579940434ce8959d54c9f4db0b03
+  created: 1762747905367
+  modified: 1762747905367
+  description: ""
+collection:
+  - url: clusters
+    name: New Request
+    meta:
+      id: req_a5dfaee940b84cbdb99dd21288c65e29
+      created: 1762747924605
+      modified: 1762747945243
+      isPrivate: false
+      description: ""
+      sortKey: -1762747924605
+    method: POST
+    headers:
+      - name: User-Agent
+        value: insomnia/12.0.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_fff2982d84334da166659d7c22a88f9cd75fc9f3
+    created: 1762747905371
+    modified: 1762747905371
+environments:
+  name: Base Environment
+  meta:
+    id: env_fff2982d84334da166659d7c22a88f9cd75fc9f3
+    created: 1762747905370
+    modified: 1762747905370
+    isPrivate: false
+spec:
+  contents:
+    openapi: 3.0.4
+    info:
+      title: cepher
+      version: 0.0.0
+      description: cepher
+      contact:
+        name: Support
+        email: sup@rest.rodeo
+    servers:
+      - url: https://api.rest.rodeo
+        description: Live
+    tags:
+      - name: cluster
+    paths:
+      /clusters:
+        post:
+          description: register cluster
+          operationId: register.cluster
+          tags:
+            - cluster
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/RegisterCluster"
+          responses:
+            "201":
+              description: cluster registered
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/Cluster"
+        get:
+          description: list clusters
+          operationId: list.clusters
+          tags:
+            - cluster
+          responses:
+            "200":
+              description: success
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Cluster"
+            "204":
+              description: no contents
+      /clusters/{id}:
+        get:
+          description: get cluster
+          operationId: get.cluster
+          tags:
+            - cluster
+          parameters:
+            - name: id
+              in: path
+              required: true
+              schema:
+                type: string
+          responses:
+            "200":
+              description: success
+              content:
+                application/json:
+                  schema:
+                    type: object
+    components:
+      schemas:
+        RegisterCluster:
+          type: object
+          properties:
+            name:
+              type: string
+            hosts:
+              type: array
+              items:
+                type: string
+            key:
+              type: string
+        Cluster:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            status:
+              type: string
+              enum:
+                - HEALTH_OK
+                - HEALTH_WARN
+                - HEALTH_ERR
+            is_stable:
+              type: boolean
+              description: 일정 시간 이상 HEALTH_OK가 유지되는 상태
+  meta:
+    id: spc_29e65de7630742dc863a1888f7bb389b
+    created: 1762747969141
+    modified: 1762764137976
