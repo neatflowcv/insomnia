@@ -1,9 +1,9 @@
 type: spec.insomnia.rest/5.0
-name: virtualbox-agent 1.0.0
+name: virtualbox-agent
 meta:
   id: wrk_ec36c68cee514d39bdce656dd2b66e16
   created: 1762764910127
-  modified: 1762764910127
+  modified: 1762766333506
   description: ""
 cookieJar:
   name: Default Jar
@@ -177,4 +177,4 @@ spec:
   meta:
     id: spc_7949feedbb1b4547b60cb9e1db9a6be9
     created: 1762764910129
-    modified: 1762764910129
+    modified: 1762766333505

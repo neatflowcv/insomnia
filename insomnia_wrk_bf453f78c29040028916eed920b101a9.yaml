@@ -1,9 +1,9 @@
 type: spec.insomnia.rest/5.0
-name: LoaKeyPool 1.0.0
+name: loa-key-pool
 meta:
   id: wrk_bf453f78c29040028916eed920b101a9
   created: 1762764257189
-  modified: 1762764257189
+  modified: 1762766328546
   description: ""
 cookieJar:
   name: Default Jar
@@ -161,4 +161,4 @@ spec:
   meta:
     id: spc_df6ecaf81d0f4634a5ab25366f245e8a
     created: 1762764257192
-    modified: 1762764270206
+    modified: 1762766328545

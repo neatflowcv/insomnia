@@ -1,9 +1,9 @@
 type: spec.insomnia.rest/5.0
-name: seven-skies 1.0.0
+name: seven-skies
 meta:
   id: wrk_ad901e0c1bbb4083b9e595a69773fa49
   created: 1762764859302
-  modified: 1762764859302
+  modified: 1762766338595
   description: ""
 cookieJar:
   name: Default Jar
@@ -71,4 +71,4 @@ spec:
   meta:
     id: spc_5a5b378c7564456690c2a38d005c1b14
     created: 1762764859304
-    modified: 1762764859305
+    modified: 1762766338594
