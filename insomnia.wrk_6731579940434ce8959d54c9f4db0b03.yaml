@@ -37,7 +37,7 @@ collection:
         meta:
           id: req_33c1dcc61c594c15ab7a50a42c672014
           created: 1762777442426
-          modified: 1762787784986
+          modified: 1762845761020
           isPrivate: false
           description: register cluster
           sortKey: -1762777442426
@@ -46,15 +46,12 @@ collection:
           mimeType: application/json
           text: |-
             {
-              "name": "string",
-              "hosts": [
-                "192.168.56.106:3300"
-              ],
-              "key": "AQAEABJpiBJDORAAXH2IKOkGFX9E8MJesTyYjg=="
+              "name": "",
+              "hosts": [],
+              "key": ""
             }
         headers:
           - name: Content-Type
-            disabled: false
             value: application/json
         settings:
           renderRequestBody: true
@@ -75,11 +72,11 @@ environments:
   meta:
     id: env_fff2982d84334da166659d7c22a88f9cd75fc9f3
     created: 1762747905370
-    modified: 1762777629204
+    modified: 1762835062921
     isPrivate: false
   data:
     scheme: http
-    host: 127.0.0.1:8080
+    host: 192.168.56.183:8080
     base_path: ""
     base_url: "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}"
   subEnvironments:
@@ -199,6 +196,9 @@ spec:
             is_stable:
               type: boolean
               description: 일정 시간 이상 HEALTH_OK가 유지되는 상태
+            detail:
+              type: string
+              description: cluster 상태가 좋지 않을때, 해당 이유에 대해 보여준다.
           required:
             - id
             - name
@@ -207,4 +207,4 @@ spec:
   meta:
     id: spc_29e65de7630742dc863a1888f7bb389b
     created: 1762747969141
-    modified: 1762778335917
+    modified: 1762844862448
